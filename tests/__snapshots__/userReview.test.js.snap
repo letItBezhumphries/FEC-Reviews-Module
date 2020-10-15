@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`It should render individual components App component renders correctly 1`] = `ShallowWrapper {}`;
+
+exports[`It should render individual components Review component renders correctly 1`] = `ShallowWrapper {}`;
+
+exports[`It should render individual components User component renders correctly 1`] = `ShallowWrapper {}`;
+
+exports[`renders correctly 1`] = `ShallowWrapper {}`;

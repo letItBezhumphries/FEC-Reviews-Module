@@ -1,0 +1,352 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1.33;
+  color: #2d333f;
+  border-bottom: 1px solid #d8d9db;
+  padding-bottom: 1rem;
+  margin: 0 0 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.writeReview {
+  color: #2DA4FF;
+  font-size: 1rem;
+  font-weight: normal;
+  align-self: center;
+}
+
+.dropdownFiltersLabel {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 500;
+  padding-bottom: 0.5rem;
+  display: flex;
+}
+
+#dropdownSorting {
+  width: 18rem;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+}
+
+.dropdownFilterContainer {
+  padding-bottom: 1rem;
+}
+
+.filtersSection {
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+  padding-right: 2rem;
+  margin-bottom: 1rem;
+}
+
+.filterTagOption {
+  margin: 0 0 0 0.25rem;
+  font-weight: 500;
+  line-height: 1.43;
+  font-size: 0.875rem;
+  color: #6f737b;
+}
+
+.filterTagLabel {
+  display: inline-flex;
+  align-items: center;
+  /* margin-right: 1rem; */
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.filterTag {
+  border: 1px solid #d8d9db;
+  background: none;
+  box-sizing: border-box;
+  margin: 5px;
+  padding: 6px;
+}
+
+.filterTag:hover{
+  border: 1px solid #2DA4FF;
+}
+
+.reviewModuleContainer {
+  width: 640px;
+}
+
+.filledScore {
+  color: #2DA4FF
+}
+
+.emptyScore {
+  color: #E1E1E1
+}
+
+.starTop {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 0.25rem;
+}
+
+.userAndReview {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: solid 1px #d8d9db;
+  color: #2d333f;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  width: 6rem;
+  position: relative;
+  flex: none;
+}
+
+.userPictureContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.userPicture {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userLocation {
+  line-height: 1.43;
+  color: #6f737b;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.userReviewNumberOuter {
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.43;
+  flex: none;
+  white-space: nowrap;
+  color: #6f737b;
+}
+
+.userPicture {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.userNameVip {
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.userInitials {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.userVip {
+  position: absolute;
+  background-color: #fdaf08;
+  padding: 2px 0.5rem;
+  font-size: 12px;
+  border-radius: 1rem;
+  font-weight: 700;
+  top: -2px;
+  color: #fff;
+  left: 0;
+}
+
+.reviewBody {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#date::before {
+  content: "\B7";
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  color: #2d333f;
+}
+
+.reviewText {
+  font-weight: bold;
+  margin: 0 0.5rem 0 0;
+  font-size: 0.875rem;
+}
+
+.reviewScore:after {
+  content: "\B7";
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  color: #2d333f;
+}
+
+.reviewStarsAndDate {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.overallScoresStars {
+  width: calc(16px * 5 + 0.25rem * 5);
+  flex-shrink: 0;
+}
+
+.overallScoresContainer {
+  display: flex;
+  width: 100%;
+  padding-bottom: 2rem;
+}
+
+.overallScoresStarsContainer {
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 0.875rem;
+  color: #2d333f;
+  font-weight: 500;
+  line-height: 1.43;
+  flex-wrap: nowrap;
+}
+
+.overallScoresRatingsSubtitle {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 500;
+  display: flex;
+}
+
+.overallScoresLabelContainer {
+  font-size: 0.875rem;
+  line-height: 1.43;
+  font-weight: bold;
+}
+
+.overallScoresFSAV {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.fsavItem {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0 0.5rem;
+  position: relative;
+  text-align: center;
+}
+
+
+.fsavItemValue {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0 0.5rem;
+  position: relative;
+  text-align: center;
+}
+
+
+.fsavItem::after {
+  background: #d8d9db;
+  content: "";
+  display: block;
+  height: 2rem;
+  position: absolute;
+  right: 0;
+  width: 1px;
+  top: calc(50% - 1rem);
+}
+
+.noiseRecommend {
+  padding-top: 1rem;
+  max-width: 100%;
+}
+
+
+.overallScoresNoise {
+  display: flex;
+  align-items: center;
+}
+
+
+.overallScoresRecommendInner {
+  display: flex;
+  align-items: center;
+}
+
+
+.overallScoresNoiseRecommendLabel {
+  margin: 0 0 0 0.25rem;
+  font-weight: 500;
+  line-height: 1.43;
+  font-size: 0.875rem;
+  color: #6f737b;
+}
+
+.overallScoresBarsContainer {
+  padding: 2rem 0 0;
+}
+
+.overallScoreBarsContainerInner {
+  margin: 0;
+  width: 16rem;
+}
+
+.overallScoreBars {
+  display: flex;
+  padding-bottom: 0.5rem;
+  align-items: center;
+}
+
+.overallScoreBars>span{
+  margin-right: 0.5rem;
+  width: 1rem;
+  text-align: center;
+}
+
+.overallScoresBarsInner {
+  display: block;
+  flex: auto;
+  height: 1rem;
+  border: 1px solid #d8d9db;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin-top: -1px;
+  margin-bottom: -2px;
+}
+
+.overallScoresBarsColor {
+  background: #2DA4FF;
+  height: 100%;
+  display: block;
+}
+
