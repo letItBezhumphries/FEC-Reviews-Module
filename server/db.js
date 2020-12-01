@@ -2,7 +2,7 @@ require('dotenv').config();
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize('Review_Module', process.env.RDS_USERNAME, process.env.RDS_PASSWORD,
   {
-    host: process.env.RDS_HOSTNAME,
+    host: process.env.RDS_HOST,
     port: process.env.RDS_PORT,
     dialect: 'mysql',
     logging: false
