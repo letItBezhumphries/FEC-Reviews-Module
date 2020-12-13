@@ -6,7 +6,7 @@ const db = require('./db.js');
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../public/dist')));
-// app.use('/restaurants/:restaurantId/reviews', express.static(path.join(__dirname, '../public/dist')));
+app.use('/restaurants/:restaurantId/reviews', express.static(path.join(__dirname, '../public/dist')));
 
 // app.get('/api/users', (req, res) => {
 //   db.User.findAll()
@@ -37,8 +37,8 @@ app.use(express.static(path.join(__dirname, '../public/dist')));
 //     });
 // });
 
-// app.get('*', function (req, res) {
-//   res.status(404).send(`Use endpoints '/api/users', or '/api/restaurants/[restaurant ID]/reviews', or '/api/restaurants/reviews'`);
-// });
+app.get('*', function (req, res) {
+  res.status(404).send(`Use endpoints '/api/users', or '/api/restaurants/[restaurant ID]/reviews', or '/api/restaurants/reviews'`);
+});
 
 module.exports = app;
