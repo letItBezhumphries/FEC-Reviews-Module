@@ -20,7 +20,7 @@
   "scripts": {
     "start": "npm-run-all --parallel start-dev build",
     "start-dev": "node ./server/server.js --w",
-    "build": "webpack --config webpack.config.js --watch",
+    "build": "webpack --config webpack.config.js",
     "test": "jest",
     "seed": "node ./seeding/seedingScript.js"
   },
