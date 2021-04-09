@@ -1,3 +1,4 @@
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -5,7 +6,7 @@ const path = require('path');
 const db = require('./db.js');
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, '../public/dist')));
+app.use('/', express.static(path.join(__dirname, '../public/dist')));
 app.use('/restaurants/:restaurantId/reviews', express.static(path.join(__dirname, '../public/dist')));
 
 app.get('/api/users', (req, res) => {

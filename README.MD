@@ -1,0 +1,1 @@
+ // "start": "npm-run-all --parallel start-dev build",

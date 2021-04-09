@@ -1,12 +1,27 @@
 require('dotenv').config();
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.RDS_USERNAME, process.env.RDS_PASSWORD,
-  {
-    host: process.env.RDS_HOST,
-    port: process.env.RDS_PORT,
+let sequelize;
+
+// if (process.env.NODE_ENV === "development") {
+//   sequelize = new Sequelize('Review_Module', `eric`, `chalon`, {
+//     host: 'localhost',
+//     dialect: 'mysql',
+//     logging: false
+//   });
+// } else {
+//   sequelize = new Sequelize(process.env.DB_NAME, process.env.RDS_USERNAME, process.env.RDS_PASSWORD, {
+//     host: process.env.RDS_HOST,
+//     port: process.env.PORT,
+//     dialect: 'mysql',
+//     logging: false
+//   });
+// }
+
+sequelize = new Sequelize('Review_Module', `eric`, `chalon`, {
+    host: 'localhost',
     dialect: 'mysql',
     logging: false
-  });
+});
 
 const User = sequelize.define('user', {
   username: {

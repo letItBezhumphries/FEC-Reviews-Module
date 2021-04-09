@@ -26,8 +26,45 @@ bundle.js
 
 config.json
 .env
+.env.development
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+config.json
+mykey
+mykey.pub
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+### Terraform ###
+# Local .terraform directories
+infrastructure/.terraform/*
+infrastructure/.terraform.lock.hcl
+
+# .tfstate files
+infrastructure/*.tfstate
+infrastructure/*.tfstate.*
+
+# Crash log files
+infrastructure/crash.log
+
+# Ignore any .tfvars files that are generated automatically for each Terraform run. Most
+# .tfvars files are managed as part of configuration and so should be included in
+# version control.
+#
+infrastructure/*.tfvars*
+
+# Ignore override files as they are usually used to override resources locally and so
+# are not checked in
+infrastructure/override.tf
+infrastructure/override.tf.json
+infrastructure/*_override.tf
+infrastructure/*_override.tf.json
+
+.eslintcache
