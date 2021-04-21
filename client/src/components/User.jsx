@@ -1,5 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import "../assets/reviewsStyle.css";
 
 const User = (props) => {
   var vipStatus = props.userData.vip === 'Yes' ? <span className="userVip">{'VIP'}</span> : '';

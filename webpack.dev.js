@@ -15,13 +15,11 @@ const devConfig = {
   output: {
     filename: 'bundle.js',
     path: DIST_DIR,
-    // publicPath: '/',
     publicPath: "http://localhost:1337/",
     assetModuleFilename: "[name][ext]",
   },
   devtool: 'inline-source-map',
   devServer: {
-    // contentBase: 'dist',
     contentBase: path.resolve(__dirname, "./public/dist"),
     index: 'index.html',
     compress: true,
@@ -31,16 +29,6 @@ const devConfig = {
     historyApiFallback: {
       index: "index.html"
     },
-    // headers: {
-    //   // 'Access-Control-Allow-Origin': '*',
-    //   'Access-Control-Allow-Origin': 'http://localhost:3000/',
-    //   'Access-Control-Allow-Credentials': true,
-    //   'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
-    // },
-    // watchOptions: {
-    //   poll: true,
-    //   ignored: '/node_modules/'
-    // }
   },
   module: {
     rules: [
@@ -74,7 +62,7 @@ const devConfig = {
       name: "reviews",
       filename: "remoteEntry.js",
       exposes: {
-        "./Reviews": "./client/src/components/bootstrap.jsx"
+        "./ReviewsModule": "./client/src/components/bootstrap.jsx"
       },
       shared: packageJson.dependencies,
     }),

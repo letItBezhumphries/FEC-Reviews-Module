@@ -8,6 +8,7 @@ library.add(faStar, faStarHalfAlt, faCommentAlt, faSignal, emptyFaStar, faThumbs
 import Review from './Review.jsx';
 import TagsSorting from './TagsSorting.jsx';
 import OverallScores from './OverallScores.jsx';
+import "../assets/reviewsStyle.css";
 
 class ReviewsMainModule extends React.Component {
   constructor(props) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import User from './User.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import "../assets/reviewsStyle.css";
 
 const Review = (props) => {
   var stars = [];

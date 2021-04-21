@@ -1,4 +1,5 @@
 import React from 'react';
+import "../assets/reviewsStyle.css";
 
 const TagsSorting = (props) => {
 
