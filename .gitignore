@@ -33,7 +33,6 @@ config.json
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
-config.json
 mykey
 mykey.pub
 

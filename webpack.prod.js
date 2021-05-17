@@ -23,7 +23,8 @@ const prodConfig = {
   output: {
     filename: 'bundle.[contenthash].js',
     path: DIST_DIR,
-    publicPath: 'http://localhost:1337/',
+    publicPath: "/reviews/latest/",
+    // publicPath: 'http://localhost:1337/',
     assetModuleFilename: 'assets/[name][contenthash][ext]'
   },
   module: {
@@ -75,7 +76,7 @@ const prodConfig = {
       filename: 'index.html'
     }),
     new Dotenv({
-      path: "./.env.development",
+      path: "./.env",
       allowEmptyValues: true,
     }),
     new ESLintPlugin({
