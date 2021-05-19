@@ -94,8 +94,7 @@ class ReviewsMainModule extends React.Component {
 
   componentDidMount() {
     var restaurantId = location.pathname.split('/')[2];
-
-    axios.get(`${process.env.DEV_API_URL}` + `${restaurantId}/reviews`)
+    axios.get(`${process.env.PROD_REVIEWS_API_URL}` + `${restaurantId}/reviews`)
       .then((result) => {
 
         var allTags = [];
