@@ -3,8 +3,8 @@ const { merge } = require('webpack-merge');
 const commonConfig = require('./webpack.common');
 var DIST_DIR = path.join(__dirname, '/public/dist');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //to clean out dist folder
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const { ModuleFederationPlugin } = require("webpack").container;
@@ -15,7 +15,7 @@ const devConfig = {
   output: {
     filename: 'bundle.js',
     path: DIST_DIR,
-    publicPath: "http://localhost:1337/",
+    publicPath: "http://127.0.0.1:9002/",
     assetModuleFilename: "[name][ext]",
   },
   devtool: 'inline-source-map',
@@ -23,18 +23,24 @@ const devConfig = {
     contentBase: path.resolve(__dirname, "./public/dist"),
     index: 'index.html',
     compress: true,
-    host: 'localhost',
+    host: '127.0.0.1',
     writeToDisk: true,
-    port: 1337,
+    port: 9002,
     historyApiFallback: {
       index: "index.html"
     },
+    proxy: {
+      "/restaurants/:id/reviews": "http://127.0.0.1:1337/restaurants/:id/reviews",
+      "/api/users": "http://127.0.0.1:1337/api/users",
+      "/api/restaurants/:id/reviews": "http://127.0.0.1:1337/api/restaurants/:id/reviews",
+      "/api/restaurants/reviews": "http://127.0.0.1:1337/api/restaurants/reviews",
+    }
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ["style-loader", 'css-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
     ]
   },
@@ -42,17 +48,16 @@ const devConfig = {
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: ['**/*']
     }),
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-      filename: 'index.html'
+    new MiniCssExtractPlugin({
+      filename: 'styles.css'
     }),
-    new CopyPlugin({
-      patterns: [
-        { from: "./public/reviewsStyle.css" }
-      ]
-    }),
+    // new CopyPlugin({
+    //   patterns: [
+    //     { from: "./public/reviewsStyle.css" }
+    //   ]
+    // }),
     new Dotenv({
-      path: "./.env.development",
+      path: "./.env",
       allowEmptyValues: true,
     }),
     new ESLintPlugin({
@@ -62,7 +67,7 @@ const devConfig = {
       name: "reviews",
       filename: "remoteEntry.js",
       exposes: {
-        "./ReviewsModule": "./client/src/components/bootstrap.jsx"
+        "./ReviewsModule": "./client/src/components/bootstrap.js"
       },
       shared: packageJson.dependencies,
     }),

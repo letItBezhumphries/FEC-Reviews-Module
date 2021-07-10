@@ -1,4 +1,4 @@
-
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -9,6 +9,10 @@ app.use(cors());
 app.use('/', express.static(path.join(__dirname, '../public/dist')));
 app.use('/restaurants/:restaurantId/reviews', express.static(path.join(__dirname, '../public/dist')));
 
+
+// @route    GET api/users
+// @desc     Get all registered users
+// @access   Public
 app.get('/api/users', (req, res) => {
   db.User.findAll()
     .then((users) => {
@@ -16,6 +20,10 @@ app.get('/api/users', (req, res) => {
     });
 });
 
+
+// @route    GET api/restaurants/:id/reviews
+// @desc     Get get all reviews for a restaurant with the given id
+// @access   Public
 app.get('/api/restaurants/:restaurantId/reviews', (req, res) => {
   db.Review.findAll({
     where: {
@@ -31,12 +39,28 @@ app.get('/api/restaurants/:restaurantId/reviews', (req, res) => {
     });
 });
 
+// @route    GET api/restaurants/reviews
+// @desc     Get all reviews for all restaurants
+// @access   Public
 app.get('/api/restaurants/reviews', (req, res) => {
   db.Review.findAll()
     .then((reviews) => {
       res.send(reviews);
     });
 });
+
+if (process.env.NODE_ENV !== 'production') {
+  const webpack = require("webpack");
+  const webpackDevMiddleware = require("webpack-dev-middleware");
+  const config = require("../webpack.dev");
+  const compiler = webpack(config);
+  app.use(
+    webpackDevMiddleware(compiler, {
+      writeToDisk: true,
+      publicPath: config.output.publicPath,
+    })
+  );
+} 
 
 app.get('*', function (req, res) {
   res.status(404).send(`Use endpoints '/api/users', or '/api/restaurants/[restaurant ID]/reviews', or '/api/restaurants/reviews'`);

@@ -93,10 +93,16 @@ class ReviewsMainModule extends React.Component {
 
 
   componentDidMount() {
+    let REVIEWS_API;
+    if (process.env.NODE_ENV !== 'production') {
+      REVIEWS_API = process.env.DEV_REVIEWS_API_URL;
+    } else {
+      REVIEWS_API = process.env.PROD_REVIEWS_API_URL;
+    }
     var restaurantId = location.pathname.split('/')[2];
-    axios.get(`${process.env.PROD_REVIEWS_API_URL}` + `${restaurantId}/reviews`)
+    axios.get(REVIEWS_API + `${restaurantId}/reviews`)
       .then((result) => {
-
+        
         var allTags = [];
         for (var i = 0; i < result.data.length; i++) {
           allTags = allTags.concat(result.data[i].tags.split(', '))
@@ -149,7 +155,7 @@ class ReviewsMainModule extends React.Component {
     } else {
       return (
         <div className="reviewModuleContainer container">
-          <h3>What {this.state.reviews.length} People Are Saying</h3>
+          <h3 className="reviewsModuleHeading">What {this.state.reviews.length} People Are Saying</h3>
           <OverallScores reviews={this.state.reviews} />
           <TagsSorting
             tagList={this.state.popularTags}

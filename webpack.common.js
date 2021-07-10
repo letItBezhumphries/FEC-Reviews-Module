@@ -1,6 +1,6 @@
 const path = require('path');
 var SRC_DIR = path.join(__dirname, '/client/src/components/Index.jsx');
-console.log(SRC_DIR);
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: SRC_DIR,
@@ -30,5 +30,12 @@ module.exports = {
       use: ['@svgr/webpack']
     }
   ],
-},
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      filename: 'index.html',
+      inject: 'body'
+    }),
+  ]
 };
