@@ -1,14 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt, faSignal } from '@fortawesome/free-solid-svg-icons';
 import { faStar as emptyFaStar, faCommentAlt, faThumbsUp } from '@fortawesome/free-regular-svg-icons';
-library.add(faStar, faStarHalfAlt, faCommentAlt, faSignal, emptyFaStar, faThumbsUp);
 import Review from './Review.jsx';
 import TagsSorting from './TagsSorting.jsx';
 import OverallScores from './OverallScores.jsx';
 import '../assets/reviewsStyle.css';
+library.add(faStar, faStarHalfAlt, faCommentAlt, faSignal, emptyFaStar, faThumbsUp);
 
 class ReviewsMainModule extends React.Component {
   constructor(props) {
@@ -144,7 +143,7 @@ class ReviewsMainModule extends React.Component {
         checkedTags: this.state.checkedTags.concat([e.target.labels[0].id])
       });
     } else if (e.target.checked === false) {
-      var removeTag = this.state.checkedTags.slice();
+      const removeTag = this.state.checkedTags.slice();
       removeTag.splice(removeTag.indexOf(e.target.labels[0].id), 1);
       this.setState({
         checkedTags: removeTag
@@ -185,15 +184,15 @@ class ReviewsMainModule extends React.Component {
     } else {
       REVIEWS_API = process.env.PROD_REVIEWS_API_URL;
     }
-    var restaurantId = location.pathname.split('/')[2];
+    const restaurantId = location.pathname.split('/')[2];
     axios.get(REVIEWS_API + `${restaurantId}/reviews`).then((result) => {
-      var allTags = [];
-      for (var i = 0; i < result.data.length; i++) {
+      let allTags = [];
+      for (let i = 0; i < result.data.length; i++) {
         allTags = allTags.concat(result.data[i].tags.split(', '));
       }
 
-      var popTags = {};
-      for (var i = 0; i < allTags.length; i++) {
+      let popTags = {};
+      for (let i = 0; i < allTags.length; i++) {
         if (!popTags[allTags[i]]) {
           popTags[allTags[i]] = 1;
         } else {
@@ -212,7 +211,7 @@ class ReviewsMainModule extends React.Component {
   }
 
   render() {
-    var mappedReviews = this.state.filteredReviews.map((review, i) => (
+    const mappedReviews = this.state.filteredReviews.map((review, i) => (
       <Review
         key={'review' + i}
         date={review.reviewDate}
