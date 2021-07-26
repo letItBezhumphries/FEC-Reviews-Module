@@ -1,47 +1,17 @@
 var restaurantsJson = require('./restaurant_ID.json');
 
 //USERS INFO
-var randNameFirst = [
-  'BrokenTableDiner',
-  'John',
-  'Jane',
-  'Chris',
-  'Albert',
-  'Leon',
-  'Claire',
-  'Sherry',
-  'Mike',
-  'Tim',
-  'David',
-  'Brad'
-];
+var randNameFirst = ['BrokenTableDiner', 'John', 'Jane', 'Chris', 'Albert', 'Leon', 'Claire', 'Sherry', 'Mike', 'Tim', 'David', 'Brad'];
 
-var randNameLast = [
-  '',
-  'Smith',
-  'Doe',
-  'Redfield',
-  'Kennedy',
-  'Wesker',
-  'B',
-  'W',
-  'C',
-  'M',
-  'S',
-  'A',
-  'T',
-  'R',
-  '420',
-  '2'
-];
+var randNameLast = ['', 'Smith', 'Doe', 'Redfield', 'Kennedy', 'Wesker', 'B', 'W', 'C', 'M', 'S', 'A', 'T', 'R', '420', '2'];
 
 var userNameFull = () => {
-  var first = randNameFirst[Math.floor(Math.random() * (randNameFirst.length))];
+  var first = randNameFirst[Math.floor(Math.random() * randNameFirst.length)];
   var last = '';
   if (first === 'BrokenTableDiner') {
     return first + last;
   } else {
-    last = randNameLast[Math.floor(Math.random() * (randNameLast.length))];
+    last = randNameLast[Math.floor(Math.random() * randNameLast.length)];
     return first + last;
   }
 };
@@ -57,16 +27,18 @@ var randLocation = [
   'New England',
   'Atlantic City',
   'Washington DC',
-  'Philadelphia'
+  'Philadelphia',
+  'Pheonix',
+  'Dallas',
+  'Chicago'
 ];
 
-var userLocation = () => randLocation[Math.floor(Math.random() * (randLocation.length))];
+var userLocation = () => randLocation[Math.floor(Math.random() * randLocation.length)];
 
 var userVipStatus = ['No', 'Yes'];
-var userVip = () => userVipStatus[Math.floor(Math.random() * (userVipStatus.length))];
+var userVip = () => userVipStatus[Math.floor(Math.random() * userVipStatus.length)];
 
-var userReviewNumber = () => Math.floor(Math.random() * 25);
-
+var userReviewNumber = () => Math.floor(Math.random() * (Math.floor(50) - Math.ceil(8) + 1) + Math.ceil(8));
 
 //REVIEWS INFO
 var randReview = [
@@ -90,16 +62,16 @@ var randReview = [
   `Roof party palo santo single-origin coffee, tattooed chillwave retro cliche shabby chic jianbing pug bespoke. YOLO sriracha kombucha church-key iceland bicycle rights semiotics butcher tbh before they sold out schlitz.`
 ];
 
-var reviewText = () => randReview[Math.floor(Math.random() * (randReview.length))];
+var reviewText = () => randReview[Math.floor(Math.random() * randReview.length)];
 
-var randRestaurantId = () => restaurantsJson[Math.floor(Math.random() * (restaurantsJson.length))].ID;
+var randRestaurantId = () => restaurantsJson[Math.floor(Math.random() * restaurantsJson.length)].ID;
 
 var randUserId = () => Math.floor(Math.random() * 50) + 1; //will be creating 50 users
 
 //generate a ISO 8601 date
 var randDate = () => {
   var years = [2015, 2016, 2017, 2018];
-  var randYear = years[Math.floor(Math.random() * (years.length))];
+  var randYear = years[Math.floor(Math.random() * years.length)];
   var randMonth = Math.floor(Math.random() * 12) + 1;
   var randMonthLength = randMonth === 2 ? 28 : [1, 3, 5, 7, 8, 10, 12].includes(randMonth) ? 31 : 30;
   randMonth = randMonth < 10 ? `0${randMonth}` : randMonth;
@@ -112,29 +84,55 @@ var randDate = () => {
 //generate tags
 var tagOptions = [
   'Authentic',
-  'Bar Seating', 'Book the Bar',
-  'Cellar', 'Charming', 'Check the Wait', 'Comfort Food', 'Convenient', 'Couples', 'Cozy', 'Craft Beer Selection',
-  'Downstairs', 'Dancing',
-  'Family Style', 'Farm to Table', 'Fit for Foodies', 'Full Bar',
-  'Good Value', 'Good for Birthdays', 'Good for a Date', 'Great for Brunch',
-  'Healthy', 'Historic', 'Hot Spot',
+  'Bar Seating',
+  'Book the Bar',
+  'Cellar',
+  'Charming',
+  'Check the Wait',
+  'Comfort Food',
+  'Convenient',
+  'Couples',
+  'Cozy',
+  'Craft Beer Selection',
+  'Downstairs',
+  'Dancing',
+  'Family Style',
+  'Farm to Table',
+  'Fit for Foodies',
+  'Full Bar',
+  'Good Value',
+  'Good for Birthdays',
+  'Good for a Date',
+  'Great for Brunch',
+  'Great for outdoor dining',
+  'Healthy',
+  'Historic',
+  'Hot Spot',
   'Kid-friendly',
-  'Live Music', 'Local Ingredients',
+  'Live Music',
+  'Local Ingredients',
   'Neighborhood Gem',
-  'Open Kitchen', 'Organic',
+  'Open Kitchen',
+  'Organic',
   'Prix Fixe Menu',
   'Quick Bite',
-  'Scenic View', 'Seasonal', 'Special Occasion',
-  'Tapas', 'Tasting Menu',
-  'Vegan', 'Vibrant Bar Scene',
-  'Waterfront', 'Wood Oven'
+  'Romantic',
+  'Scenic View',
+  'Seasonal',
+  'Special Occasion',
+  'Tapas',
+  'Tasting Menu',
+  'Vegan',
+  'Vibrant Bar Scene',
+  'Waterfront',
+  'Wood Oven'
 ];
 
 var randTags = () => {
   var tagNumber = Math.floor(Math.random() * 10) + 1; //determine a number of tags a review will have
   var selectedTags = [];
   for (var i = 0; i < tagNumber; i++) {
-    var findTag = tagOptions[Math.floor(Math.random() * (tagOptions.length))];
+    var findTag = tagOptions[Math.floor(Math.random() * tagOptions.length)];
     if (selectedTags.indexOf(findTag) === -1) {
       selectedTags.push(findTag);
     }
@@ -143,29 +141,29 @@ var randTags = () => {
 };
 
 //generate random ratings (with 3s and 4s more likely)
-var randRating = [1, 2, 3, 3, 4, 4, 4, 5];
+var randRating = [1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5];
 var storedFood;
 var storedService;
 var storedAmbience;
 var storedValue;
 
 var randFood = () => {
-  var temp = randRating[Math.floor(Math.random() * (randRating.length))];
+  var temp = randRating[Math.floor(Math.random() * randRating.length)];
   storedFood = temp;
   return temp;
 };
 var randService = () => {
-  var temp = randRating[Math.floor(Math.random() * (randRating.length))];
+  var temp = randRating[Math.floor(Math.random() * randRating.length)];
   storedService = temp;
   return temp;
 };
 var randAmbience = () => {
-  var temp = randRating[Math.floor(Math.random() * (randRating.length))];
+  var temp = randRating[Math.floor(Math.random() * randRating.length)];
   storedAmbience = temp;
   return temp;
 };
 var randValue = () => {
-  var temp = randRating[Math.floor(Math.random() * (randRating.length))];
+  var temp = randRating[Math.floor(Math.random() * randRating.length)];
   storedValue = temp;
   return temp;
 };
@@ -173,12 +171,12 @@ var randValue = () => {
 //get average rating up to one decimal place
 var randOverall = () => Math.round(((storedFood + storedService + storedAmbience + storedValue) / 4) * 10) / 10;
 
-var recommendation = () => randOverall() >= 3.0 ? 'Y' : 'N';
+var recommendation = () => (randOverall() >= 3.0 ? 'Y' : 'N');
 
 //generate random noise rating (with 1s and 2s more likely)
-var randNoiseRatings = [1, 1, 2, 2, 2, 2, 3];
+var randNoiseRatings = [1, 1, 1, 1, 2, 2, 2, 2, 2, 3];
 
-var randNoise = () => randNoiseRatings[Math.floor(Math.random() * (randNoiseRatings.length))];
+var randNoise = () => randNoiseRatings[Math.floor(Math.random() * randNoiseRatings.length)];
 
 module.exports = {
   userNameFull,

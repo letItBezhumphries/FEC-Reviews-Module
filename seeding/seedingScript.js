@@ -17,7 +17,7 @@ var insertData = (username) => {
         counterUser++;
         insertData(seedingData.userNameFull());
       });
-  } else if (counterUser >= 50 && counterReview < 150) {
+  } else if (counterUser >= 50 && counterReview < 250) {
     db.Review.create({
       userId: seedingData.randUserId(),
       restaurantId: seedingData.randRestaurantId(),
