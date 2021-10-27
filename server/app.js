@@ -1,9 +1,13 @@
-require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const path = require('path');
 const db = require('./db.js');
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config({ path: '../.production.env' });
+} else {
+  require('dotenv').config({ path: '../.deploy.env' });
+}
 
 app.use(cors());
 app.use('/', express.static(path.join(__dirname, '../public/dist')));
@@ -50,6 +54,7 @@ app.get('/api/restaurants/reviews', (req, res) => {
 });
 
 if (process.env.NODE_ENV !== 'production') {
+  console.log('Application is running in development env!!!');
   const webpack = require("webpack");
   const webpackDevMiddleware = require("webpack-dev-middleware");
   const config = require("../webpack.dev");
@@ -58,6 +63,7 @@ if (process.env.NODE_ENV !== 'production') {
     webpackDevMiddleware(compiler, {
       writeToDisk: true,
       publicPath: config.output.publicPath,
+      stats: 'errors-only'
     })
   );
 } 

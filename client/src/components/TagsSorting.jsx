@@ -1,34 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import '../assets/reviewsStyle.css';
+import "../assets/reviewsStyle.css";
 
-const TagsSorting = ({ tagList, scrollToFilter, filterByTag, reviewNumber, filterBySelect }) => {
-  const tagsList = tagList.length >= 5 ? tagList.slice(0, 5) : tagList.slice(0, tagList.length);
-  let filtersSection = [];
+const TagsSorting = (props) => {
 
-  if (tagsList.length > 0) {
-    filtersSection = tagsList.map((tag, i) => (
-      <span
-        key={'filterTag' + i}
-        className="filterTag"
-        onClick={(e) => {
-          e.persist();
-          scrollToFilter();
-        }}
-      >
+  var tagList = props.tagList.length >= 5 ? props.tagList.slice(0, 5) : props.tagList.slice(0, props.tagList.length);
+  var filtersSection = [];
+
+  if (tagList.length > 0) {
+    filtersSection = tagList.map((tag, i) =>
+      <span key={'filterTag' + i} className="filterTag" onClick={(e) => { e.persist(); props.scrollToFilter(); }}>
         <label id={tag} className="filterTagLabel" htmlFor={'reviewFilter' + i}>
-          <input
-            type="checkbox"
-            id={'reviewFilter' + i}
-            onClick={(e) => {
-              e.persist();
-              filterByTag(e);
-            }}
-          />
-          <span className="filterTagOption">{`${tag} (${reviewNumber.filter((review) => review.tags.includes(tag)).length})`}</span>
+          <input type="checkbox" id={'reviewFilter' + i} onClick={(e) => { e.persist(); props.filterByTag(e); }} />
+          <span className="filterTagOption">{`${tag} (${props.reviewNumber.filter((review) => review.tags.includes(tag)).length})`}</span>
         </label>
       </span>
-    ));
+    );
   }
 
   return (
@@ -36,14 +22,7 @@ const TagsSorting = ({ tagList, scrollToFilter, filterByTag, reviewNumber, filte
       <div className="dropdownFilterContainer">
         <div className="dropdownFiltersLabel">Sort by</div>
         <div className="dropdownMenu">
-          <select
-            name="dropdownSorting"
-            id="dropdownSorting"
-            onChange={(e) => {
-              e.persist();
-              filterBySelect(e);
-            }}
-          >
+          <select name="dropdownSorting" id="dropdownSorting" onChange={(e) => { e.persist(); props.filterBySelect(e); }}>
             <option value="Newest">Newest</option>
             <option value="Highest rating">Highest rating</option>
             <option value="Lowest rating">Lowest rating</option>
@@ -52,18 +31,12 @@ const TagsSorting = ({ tagList, scrollToFilter, filterByTag, reviewNumber, filte
       </div>
       <div className="dropdownFilterContainer">
         <div className="dropdownFiltersLabel">Filters</div>
-        <div className="filtersSection">{filtersSection}</div>
+        <div className="filtersSection">
+          {filtersSection}
+        </div>
       </div>
     </div>
   );
-};
-
-TagsSorting.propTypes = {
-  tagList: PropTypes.array,
-  scrollToFilter: PropTypes.func,
-  filterByTag: PropTypes.func,
-  reviewNumber: PropTypes.number,
-  filterBySelect: PropTypes.func
 };
 
 export default TagsSorting;

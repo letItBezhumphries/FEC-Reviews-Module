@@ -1,31 +1,35 @@
-const path = require('path');
-const { merge } = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
-const ESLintPlugin = require('eslint-webpack-plugin');
+const path = require("path");
+const { merge } = require("webpack-merge");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
+const ESLintPlugin = require("eslint-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
-const commonConfig = require('./webpack.common');
-const DIST_DIR = path.join(__dirname, '/public/dist');
-const packageJson = require('./package.json');
-const TerserPlugin = require('terser-webpack-plugin');
+const commonConfig = require("./webpack.common");
+const DIST_DIR = path.join(__dirname, "/public/dist");
+const packageJson = require("./package.json");
+require('dotenv').config({ path: "./.production.env" });
+
+const reviewsPublic = process.env.REVIEWS_PUBLIC;
+
+console.log("here is the reviewsPublic: ", reviewsPublic);
 
 const prodConfig = {
-  mode: 'production',
+  mode: "production",
   devtool: "source-map",
   output: {
-    filename: 'bundle.[contenthash].js',
+    filename: "[name].[contenthash].js",
     path: DIST_DIR,
-    publicPath: "/reviews/latest/",
-    assetModuleFilename: 'assets/[name][contenthash][ext]'
+    publicPath: `${reviewsPublic}`,
+    assetModuleFilename: "assets/[name][contenthash][ext]",
   },
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader, 
-          'css-loader',
+          MiniCssExtractPlugin.loader,
+          "css-loader",
           {
             loader: "postcss-loader",
             options: {
@@ -33,48 +37,31 @@ const prodConfig = {
                 plugins: [require("autoprefixer")()],
               },
             },
-          }
+          },
         ],
         sideEffects: true,
       },
-      // {
-      //   test: /\.scss$/,
-      //   use: [
-      //     MiniCssExtractPlugin.loader, 
-      //     'css-loader', 
-      //     'sass-loader',   
-      //     {
-      //       loader: "postcss-loader",
-      //       options: {
-      //         postcssOptions: {
-      //           plugins: [require("autoprefixer")()],
-      //         },
-      //       },
-      //     },
-      //   ],
-      //   sideEffects: true,
-      // },
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'styles.[contenthash].css'
+      filename: "styles.[contenthash].css",
     }),
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['**/*']
+      cleanOnceBeforeBuildPatterns: ["**/*"],
     }),
     new Dotenv({
-      path: "./.env",
+      path: "./.production.env",
       allowEmptyValues: true,
     }),
     new ESLintPlugin({
-      fix: true
+      fix: true,
     }),
     new ModuleFederationPlugin({
       name: "reviews",
       filename: "remoteEntry.js",
       exposes: {
-        "./ReviewsModule": "./client/src/components/bootstrap.js"
+        "./ReviewsModule": "./client/src/components/bootstrap.js",
       },
       shared: packageJson.dependencies,
     }),

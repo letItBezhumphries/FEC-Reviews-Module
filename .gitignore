@@ -23,10 +23,11 @@ coverage
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
 bundle.js
+public/dist/
 
 config.json
-.env
-.env.development
+*.env
+env-us-west-2
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
@@ -67,3 +68,9 @@ infrastructure/*_override.tf
 infrastructure/*_override.tf.json
 
 .eslintcache
+NOTES
+
+stats.json
+.my.cnf
+outdated.txt
+webpack.prod2.js

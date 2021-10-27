@@ -1,20 +1,24 @@
-require('dotenv').config();
 const Sequelize = require('sequelize');
 let sequelize;
 
 if (process.env.NODE_ENV !== "production") {
-  sequelize = new Sequelize('Review_Module', `eric`, `chalon`, {
-    host: 'localhost',
-    dialect: 'mysql',
-    logging: false
-  });
-} else {
+  require('dotenv').config({ path: "/opt/reviews/.deploy.env"});
   sequelize = new Sequelize(process.env.DB_NAME, process.env.RDS_USERNAME, process.env.RDS_PASSWORD, {
     host: process.env.RDS_HOST,
-    port: process.env.PORT,
+    port: process.env.RDS_PORT,
     dialect: 'mysql',
     logging: false
   });
+  console.log('connected to mysql in development!!')
+} else {
+  require('dotenv').config({ path: "/opt/reviews/.production.env"});
+  sequelize = new Sequelize(process.env.DB_NAME, process.env.RDS_USERNAME, process.env.RDS_PASSWORD, {
+    host: process.env.RDS_HOST,
+    port: process.env.RDS_PORT,
+    dialect: 'mysql',
+    logging: false,
+  });
+  console.log('connected to mysql in production!!')
 }
 
 const User = sequelize.define('user', {

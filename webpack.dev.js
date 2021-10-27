@@ -4,7 +4,6 @@ const commonConfig = require('./webpack.common');
 var DIST_DIR = path.join(__dirname, '/public/dist');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //to clean out dist folder
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const { ModuleFederationPlugin } = require("webpack").container;
@@ -13,27 +12,40 @@ const packageJson = require('./package.json');
 const devConfig = {
   mode: 'development',
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: DIST_DIR,
     publicPath: "http://127.0.0.1:9002/",
     assetModuleFilename: "[name][ext]",
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.resolve(__dirname, "./public/dist"),
-    index: 'index.html',
+    devMiddleware: {
+      index: false,
+      writeToDisk: true,
+    },
     compress: true,
     host: '127.0.0.1',
-    writeToDisk: true,
     port: 9002,
     historyApiFallback: {
       index: "index.html"
     },
     proxy: {
-      "/restaurants/:id/reviews": "http://127.0.0.1:1337/restaurants/:id/reviews",
-      "/api/users": "http://127.0.0.1:1337/api/users",
-      "/api/restaurants/:id/reviews": "http://127.0.0.1:1337/api/restaurants/:id/reviews",
-      "/api/restaurants/reviews": "http://127.0.0.1:1337/api/restaurants/reviews",
+      "/restaurants/:id/reviews": {
+        target: "http://127.0.0.1:1337/restaurants/:id/reviews",
+        changeOrigin: true, 
+      },
+      "/api/users": {
+        target: "http://127.0.0.1:1337/api/users",
+        changeOrigin: true
+      },      
+      "/api/restaurants/:id/reviews": {
+        target: "http://127.0.0.1:1337/api/restaurants/:id/reviews",
+        changeOrigin: true
+      },      
+      "/api/restaurants/reviews": {
+        target: "http://127.0.0.1:1337/api/restaurants/reviews",
+        changeOrigin: true
+      }      
     }
   },
   module: {
@@ -51,13 +63,8 @@ const devConfig = {
     new MiniCssExtractPlugin({
       filename: 'styles.css'
     }),
-    // new CopyPlugin({
-    //   patterns: [
-    //     { from: "./public/reviewsStyle.css" }
-    //   ]
-    // }),
     new Dotenv({
-      path: "./.env",
+      path: "./.deploy.env",
       allowEmptyValues: true,
     }),
     new ESLintPlugin({
